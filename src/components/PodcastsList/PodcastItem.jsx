@@ -4,7 +4,7 @@ import styles from "./podcastItem.module.css";
 export default function PodcastItem({ imageUrl, title, author }) {
   return (
     <li className={styles.podcast}>
-      <div className={styles.imageUrl}>
+      <div className={styles.imageContainer}>
         <img src={imageUrl} alt={`${title}`} />
       </div>
       <div className={styles.content}>
