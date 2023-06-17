@@ -1,0 +1,27 @@
+.podcast {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 2.5rem;
+  width: 3.5rem;
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.content {
+  margin-top: auto;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.author {
+  color: grey;
+}
