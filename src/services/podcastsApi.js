@@ -14,6 +14,7 @@ const getPodcasts = async () => {
     feed: { entry: podcasts },
   } = await response.json();
 
+  // transform all the podcast to have a better API contract, so that if API change, no modifications are needed.
   return podcasts.map((p) => ({
     id: p.id.attributes["im:id"],
     title: p.title.label,
