@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import podcastsApi from "../services/podcastsApi";
 import storage from "../services/podcastStorage";
 
 export default function usePodcasts() {
-  const [podCasts, setPodcasts] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
 
-  useEffect(() => {
+  const retrievePodcasts = useCallback(() => {
     if (storage.arePodcastsStored() && !storage.hasOneDayPassed()) {
       setPodcasts(storage.getPodcasts);
     } else {
@@ -16,5 +16,13 @@ export default function usePodcasts() {
     }
   }, []);
 
-  return [podCasts];
+  const refreshPodcasts = () => {
+    retrievePodcasts();
+  };
+
+  useEffect(() => {
+    retrievePodcasts();
+  }, [retrievePodcasts]);
+
+  return { podcasts, setPodcasts, refreshPodcasts };
 }
