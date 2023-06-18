@@ -1,13 +1,16 @@
-const KEY = "podcasts";
-const EXPIRATION_KEY = "podcastsExpiration";
+const PODCAST_COLLECTION = "podcasts_collection";
+const EXPIRATION_PODCAST_COLLECTION = "podcastsExpiration";
 
 const savePodcasts = (podcasts) => {
-  localStorage.setItem(KEY, JSON.stringify(podcasts));
-  localStorage.setItem(EXPIRATION_KEY, new Date().getTime().toString());
+  localStorage.setItem(PODCAST_COLLECTION, JSON.stringify(podcasts));
+  localStorage.setItem(
+    EXPIRATION_PODCAST_COLLECTION,
+    new Date().getTime().toString()
+  );
 };
 
 const getPodcasts = () => {
-  const serializedPodcasts = localStorage.getItem(KEY);
+  const serializedPodcasts = localStorage.getItem(PODCAST_COLLECTION);
   if (serializedPodcasts) {
     return JSON.parse(serializedPodcasts);
   }
@@ -16,7 +19,7 @@ const getPodcasts = () => {
 
 // Check if a day has passed since the last storage of podcasts
 const hasOneDayPassed = () => {
-  const storedTime = localStorage.getItem(EXPIRATION_KEY);
+  const storedTime = localStorage.getItem(EXPIRATION_PODCAST_COLLECTION);
   if (storedTime) {
     const currentTime = new Date().getTime();
     const storedTimestamp = parseInt(storedTime);
@@ -27,7 +30,7 @@ const hasOneDayPassed = () => {
 };
 
 const arePodcastsStored = () => {
-  const serializedPodcasts = localStorage.getItem(KEY);
+  const serializedPodcasts = localStorage.getItem(PODCAST_COLLECTION);
   return serializedPodcasts !== null;
 };
 
