@@ -26,8 +26,9 @@ const getPodcasts = async () => {
 };
 
 const getPodcast = async (podcastId) => {
+  const url = `${API_PODCAST}${podcastId}&media=podcast&entity=podcastEpisode&limit=100`;
   const response = await fetch(
-    `${API_PODCAST}${podcastId}&media=podcast&entity=podcastEpisode&limit=10`
+    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`
   );
   if (!response.ok) {
     console.error(`Error requesting Podcast with id ${podcastId}.`);
@@ -35,11 +36,12 @@ const getPodcast = async (podcastId) => {
   }
 
   // The API returns a .txt file with the json inside.
-  const responseText = await response.text();
+  const responseText = await response.json();
 
-  const { results: podcast } = JSON.parse(responseText);
+  const { results: podcast } = JSON.parse(responseText.contents);
 
   const episodes = podcast.slice(1).map((e) => ({
+    id: e.trackId,
     title: e.trackName,
     description: e.description,
     date: e.releaseDate,
@@ -47,9 +49,13 @@ const getPodcast = async (podcastId) => {
     track: e.episodeUrl,
   }));
 
+  const noDescription =
+    "As the description field is not coming in the response I have to fill the space with this text.";
+
   return {
     id: podcast[0].trackId,
     title: podcast[0].trackName,
+    description: podcast[0].shortDescription || noDescription,
     author: podcast[0].artistName,
     imageUrl: podcast[0].artworkUrl60,
     episodes: episodes,

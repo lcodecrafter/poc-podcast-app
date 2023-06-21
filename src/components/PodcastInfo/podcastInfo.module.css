@@ -1,0 +1,21 @@
+.podcastInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  padding: 1rem 2rem;
+}
+
+.imageContainer img {
+  width: 5rem;
+  height: auto;
+}
+
+.titleContainer {
+  padding: 1rem;
+}
+
+.descriptionContainer {
+  padding: 1rem;
+}
