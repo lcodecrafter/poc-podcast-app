@@ -4,23 +4,17 @@ import styles from "./home.module.css";
 import PodcastFilter from "../components/PodcastFilter";
 
 function Home() {
-  const { podcasts, setPodcasts, refreshPodcasts } = usePodcasts();
-  const filterPodcastHandler = (filteredPodcasts) => {
-    if (filteredPodcasts.length === 0) {
-      refreshPodcasts();
-      return;
-    }
+  const { podcasts, filteredPodcasts, filterPodcasts } = usePodcasts();
 
-    setPodcasts(filteredPodcasts[0] === -1 ? [] : filteredPodcasts);
-  };
+  const podcastList = filteredPodcasts.length > 0 ? filteredPodcasts : podcasts;
 
   return (
     <main className={styles.container}>
       <PodcastFilter
-        podcasts={podcasts}
-        onFilterPodcasts={filterPodcastHandler}
+        podcastLength={filteredPodcasts.length || podcasts.length}
+        onFilterPodcasts={filterPodcasts}
       />
-      <PodcastList podcasts={podcasts} />
+      <PodcastList podcasts={podcastList} />
     </main>
   );
 }

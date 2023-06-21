@@ -2,30 +2,25 @@ import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "./PodcastFilter.module.css";
 
-export default function PodcastFilter({ podcasts, onFilterPodcasts }) {
+export default function PodcastFilter({ podcastLength, onFilterPodcasts }) {
   const [filterText, setFilterText] = useState("");
+  const [filterUsed, setFilterUsed] = useState(false); // track if user used the filter
 
   useEffect(() => {
     if (filterText.trim() !== "") {
-      const delayDebounceFn = setTimeout(() => {
-        // Filter podcasts by title
-        const filteredPodcasts = podcasts.filter((podcast) =>
-          podcast.title.toLowerCase().includes(filterText.toLowerCase())
-        );
+      setFilterUsed(true);
 
-        onFilterPodcasts(
-          // If the title does not match return an array with -1 to distinguish between not found podcast and reset search
-          filteredPodcasts.length === 0 ? [-1] : filteredPodcasts
-        );
+      const delayDebounceFn = setTimeout(() => {
+        onFilterPodcasts(filterText);
       }, 500);
 
       return () => {
         clearTimeout(delayDebounceFn);
       };
-    } else {
-      onFilterPodcasts([]);
+    } else if (filterUsed) {
+      onFilterPodcasts("");
     }
-  }, [filterText, podcasts, onFilterPodcasts]);
+  }, [filterText, filterUsed, onFilterPodcasts]);
 
   const handleFilterChange = (e) => {
     setFilterText(e.target.value);
@@ -34,7 +29,7 @@ export default function PodcastFilter({ podcasts, onFilterPodcasts }) {
   return (
     <div className={styles.container}>
       <div className={styles.podcastCount}>
-        <span>{podcasts.length}</span>
+        <span>{podcastLength}</span>
       </div>
       <form
         onSubmit={(e) => {
@@ -53,13 +48,6 @@ export default function PodcastFilter({ podcasts, onFilterPodcasts }) {
 }
 
 PodcastFilter.propTypes = {
-  podcasts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      imageUrl: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  podcastLength: PropTypes.number.isRequired,
   onFilterPodcasts: PropTypes.func.isRequired,
 };

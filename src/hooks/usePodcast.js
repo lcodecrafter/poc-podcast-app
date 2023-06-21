@@ -4,6 +4,7 @@ import storage from "../services/storage/podcastStorage";
 
 export default function usePodcasts(podcastId) {
   const [podcasts, setPodcasts] = useState([]);
+  const [filteredPodcasts, setFilteredPodcasts] = useState([]);
 
   const retrievePodcastsCollection = useCallback(() => {
     if (
@@ -37,6 +38,22 @@ export default function usePodcasts(podcastId) {
     retrievePodcastsCollection();
   };
 
+  const filterPodcasts = useCallback(
+    (filterText) => {
+      if (filterText.trim() === "") {
+        setFilteredPodcasts([]);
+        return;
+      }
+      // Filter podcasts by title
+      const filterPodcasts = podcasts.filter((podcast) =>
+        podcast.title.toLowerCase().includes(filterText.toLowerCase())
+      );
+
+      setFilteredPodcasts(filterPodcasts);
+    },
+    [podcasts]
+  );
+
   useEffect(() => {
     if (podcastId) {
       retrievePodcast(podcastId);
@@ -45,5 +62,11 @@ export default function usePodcasts(podcastId) {
     }
   }, [retrievePodcastsCollection, retrievePodcast, podcastId]);
 
-  return { podcasts, setPodcasts, refreshPodcasts };
+  return {
+    podcasts,
+    setPodcasts,
+    refreshPodcasts,
+    filterPodcasts,
+    filteredPodcasts,
+  };
 }
