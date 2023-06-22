@@ -1,4 +1,4 @@
-import { convertMillisecondsToHMS } from "../utils/helpers";
+import { convertMillisecondsToHMS, formatDate } from "../utils/helpers";
 
 const API_PODCASTS =
   "https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json";
@@ -44,7 +44,7 @@ const getPodcast = async (podcastId) => {
     id: e.trackId,
     title: e.trackName,
     description: e.description,
-    date: e.releaseDate,
+    date: formatDate(e.releaseDate),
     duration: convertMillisecondsToHMS(e.trackTimeMillis),
     track: e.episodeUrl,
   }));
@@ -57,7 +57,7 @@ const getPodcast = async (podcastId) => {
     title: podcast[0].trackName,
     description: podcast[0].shortDescription || noDescription,
     author: podcast[0].artistName,
-    imageUrl: podcast[0].artworkUrl60,
+    imageUrl: podcast[0].artworkUrl100,
     episodes: episodes,
   };
 };

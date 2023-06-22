@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import usePodcast from "../hooks/usePodcast";
 import PodcastInfo from "../components/PodcastInfo";
+import Episodes from "../components/Episodes";
+import styles from "./podcast.module.css";
 
 export default function Podcast() {
   const { podcastId } = useParams();
@@ -11,8 +13,9 @@ export default function Podcast() {
   }
 
   return (
-    <main>
+    <main className={styles.container}>
       <PodcastInfo {...podcasts} />
+      <Episodes episodes={podcasts.episodes} podcastId={podcastId} />
     </main>
   );
 }

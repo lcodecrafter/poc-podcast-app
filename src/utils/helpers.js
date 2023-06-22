@@ -7,3 +7,13 @@ export function convertMillisecondsToHMS(milliseconds) {
     .toString()
     .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
 }
+
+export function formatDate(dateString) {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
+}

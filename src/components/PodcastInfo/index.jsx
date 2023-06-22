@@ -7,12 +7,15 @@ export default function PodcastInfo({ imageUrl, title, author, description }) {
       <div className={styles.imageContainer}>
         <img src={imageUrl} alt={title} />
       </div>
+      <div className={styles.separator}></div>
       <div className={styles.titleContainer}>
         <span>
           <b>{title}</b>
         </span>
-        <span>{author}</span>
+        <br />
+        <span>by {author}</span>
       </div>
+      <div className={styles.separator}></div>
       <div className={styles.descriptionContainer}>
         <span>
           <b>Description</b>

@@ -1,8 +1,45 @@
 .podcastEpisodes {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  flex-basis: 100%;
+  gap: 1.8rem;
 }
 
 .numberEpisodes {
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0px 3px 11px -3px rgba(0, 0, 0, 0.4);
+}
+.numberEpisodes h2 {
+  margin: 0;
+  padding: 0;
+}
+.episodesList {
+  display: flex;
+  flex-direction: column;
+  padding: 1.8rem;
+  box-shadow: 0px 3px 11px -3px rgba(0, 0, 0, 0.4);
+}
+
+.episodesList .row:nth-child(even):not(.tHeader) {
+  background-color: rgb(202, 202, 202);
+}
+
+.row {
+  display: flex;
+  padding: 1rem;
+  box-shadow: 0px 5px 4px -3px rgba(0, 0, 0, 0.4);
+}
+
+.row div {
+  flex-basis: 15%;
+}
+
+.episodesList .columnTitle {
+  flex-basis: 70%;
+}
+
+.link {
+  color: var(--secondary-color);
+  text-decoration: none;
 }
