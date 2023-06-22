@@ -1,19 +1,32 @@
 import PropTypes from "prop-types";
 import styles from "./podcastInfo.module.css";
+import { Link } from "react-router-dom";
 
-export default function PodcastInfo({ imageUrl, title, author, description }) {
+export default function PodcastInfo({
+  id,
+  imageUrl,
+  title,
+  author,
+  description,
+}) {
   return (
     <article className={styles.podcastInfo}>
       <div className={styles.imageContainer}>
-        <img src={imageUrl} alt={title} />
+        <Link to={`/podcast/${id}`}>
+          <img src={imageUrl} alt={title} />
+        </Link>
       </div>
       <div className={styles.separator}></div>
       <div className={styles.titleContainer}>
-        <span>
-          <b>{title}</b>
-        </span>
+        <b>
+          <Link to={`/podcast/${id}`} className={styles.link}>
+            {title}
+          </Link>
+        </b>
         <br />
-        <span>by {author}</span>
+        <Link to={`/podcast/${id}`} className={styles.link}>
+          by {author}
+        </Link>
       </div>
       <div className={styles.separator}></div>
       <div className={styles.descriptionContainer}>
@@ -30,6 +43,7 @@ export default function PodcastInfo({ imageUrl, title, author, description }) {
 }
 
 PodcastInfo.propTypes = {
+  id: PropTypes.number.isRequired,
   imageUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,

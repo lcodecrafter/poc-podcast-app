@@ -26,6 +26,11 @@
   padding: 1rem;
 }
 
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
 .descriptionContainer {
   padding: 1rem;
 }
