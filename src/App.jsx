@@ -1,14 +1,9 @@
 import PropTypes from "prop-types";
+import { LoadingProvider } from "./contexts/loading-context";
 import "./App.css";
-import Nav from "./components/Nav";
 
 function App({ children }) {
-  return (
-    <>
-      <Nav />
-      {children}
-    </>
-  );
+  return <LoadingProvider>{children}</LoadingProvider>;
 }
 
 App.propTypes = {
