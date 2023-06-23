@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./podcastInfo.module.css";
-import { Link } from "react-router-dom";
+import Link from "../UI/Link";
 
 export default function PodcastInfo({
   id,

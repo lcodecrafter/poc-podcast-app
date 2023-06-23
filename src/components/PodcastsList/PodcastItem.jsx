@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "../UI/Link";
 import PropTypes from "prop-types";
 import styles from "./podcastItem.module.css";
 
