@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./episodes.module.css";
-import { Link } from "react-router-dom";
+import Link from "../UI/Link";
 
 export default function Episodes({ episodes, podcastId }) {
   return (
@@ -23,10 +23,7 @@ export default function Episodes({ episodes, podcastId }) {
         {episodes.map((e) => (
           <div key={e.id} className={styles.row}>
             <div className={styles.columnTitle}>
-              <Link
-                to={`/podcast/${podcastId}/episode/${e.id}`}
-                className={styles.link}
-              >
+              <Link to={`/podcast/${podcastId}/episode/${e.id}`}>
                 {e.title}
               </Link>
             </div>

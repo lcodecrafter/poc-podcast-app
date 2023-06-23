@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import Home from "./pages/Home.jsx";
 import Podcast from "./pages/Podcast.jsx";
-import Episode from "./pages/Episode.jsx";
+import EpisodeDetails from "./pages/EpisodeDetails.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/podcast/:podcastId/episode/:episodeId",
-    element: <Episode />,
+    element: <EpisodeDetails />,
   },
 ]);
 

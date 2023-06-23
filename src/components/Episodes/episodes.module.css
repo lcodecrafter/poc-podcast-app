@@ -38,8 +38,3 @@
 .episodesList .columnTitle {
   flex-basis: 70%;
 }
-
-.link {
-  color: var(--secondary-color);
-  text-decoration: none;
-}
